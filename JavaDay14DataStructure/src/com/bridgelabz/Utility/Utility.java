@@ -54,13 +54,35 @@ public class Utility {
 		 }
 	 }
 	 
-	//method to pop from linked list
+	//--------------method to pop from linked list------------
 	 public int popLinkedList() {
 		 int result = head.data;
 		 LinkedListNode currentNode = head.next;
 		 head.next = null;
 		 head = currentNode;
 		 return result;
+	 }
+	 
+	 //-------pop last element from linked list --------
+	 public int popLast() {
+		 LinkedListNode currentNode = head;
+		while(currentNode.next.next != null) {
+			currentNode = currentNode.next;
+		}
+		int lastNodeData = currentNode.next.data;
+		currentNode.next = null;
+		 return lastNodeData;
+	 }
+	 
+	 //------ search element from linked list -------
+	 public boolean searchLinkedList(int data) {
+		 LinkedListNode currentNode = head;
+		 while(currentNode.data != data) {
+			 currentNode = currentNode.next;
+		 }
+		 if(currentNode.data == data)
+			return true;
+		 return false;
 	 }
 	
 /*------------------------ Stack methods ------------------------*/
@@ -96,7 +118,7 @@ public class Utility {
 		}
 		
 		// -------method to peak data from stack-------------
-		private int peek() {
+		public int peek() {
 			return top.data;
 		}
 		
@@ -118,6 +140,91 @@ public class Utility {
 			pop();
 			printStack();
 			push(ele);
+		}
+		
+		// -------method to search element from stack-------------
+		public boolean searchStack(int data) {
+	        StackNode node = top;
+	        while (node != null){
+	            if(node.data == data)
+	            	return true;
+	            node = node.next;
+	        }
+	        return false;
+	    }
+		
+/*------------------------ Queue methods ------------------------*/
+		private QueueNode rear = null;
+		private QueueNode front = null;
+		private int qlength = 0;
+			
+		private class QueueNode{
+			private int data;
+			private QueueNode next;
+			private QueueNode previous;
+			public QueueNode(int data) {
+				this.data = data;
+			}
+		}
+		
+		// -------method to get length of queue-------------
+		public int getQLen() {
+			return qlength;
+		}
+				
+		// -------method to check if queue is empty-------------
+		public boolean isQEmpty() {
+			return qlength == 0;
+		}
+		
+		// -------method to add element in queue -------------
+		public void enQueue(int data) {
+			 QueueNode newNode = new QueueNode(data);
+			 if(front == null) {
+				 newNode.next = rear;
+				 rear = newNode ;
+				 front = newNode;
+			 }
+			 else {
+				QueueNode currentNode = rear;
+				while(currentNode.next != null) {
+					 currentNode = currentNode.next;
+				 }
+				 currentNode.next = newNode;
+				 rear = currentNode;
+			 }
+			 qlength++;
+		 }
+		
+		// ----------print all elements queue -----
+		public void printQueue() {
+	        QueueNode node = front;
+	        while (node != null){
+	        	System.out.print(node.data+"<--");
+	            node = node.next;
+	        }
+	    }
+		
+		// ----------remove data from queue -----
+		public int deQueue() {
+			int result = front.data;
+			QueueNode currentNode = front.next;
+			 front.next = null;
+			 front = currentNode;
+			rear = rear.next;
+			qlength--;
+			return result;
+		}
+		
+		// ----------search elements queue -----
+		public boolean searchQueue(int data) {
+			QueueNode node = front;
+			while (node.data != data){
+				node = node.next;
+			}
+			if(node.data == data)
+				return true;
+			return false;
 		}
 }
 
