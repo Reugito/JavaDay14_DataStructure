@@ -14,7 +14,7 @@ public class Utility {
 		}
 	}
 
-	//method to print linked list
+	//----------method to print linked list----------
 	 public void printLinkedList() {
 	     LinkedListNode currNode = head;
 	     System.out.print("LinkedList: ");
@@ -25,7 +25,7 @@ public class Utility {
 	     System.out.println(currNode);
 	 }
 	 
-	//method to insert between linked list
+	//---------method to insert between linked list-------------
 	 public void insertBetweenLinkedList(int position, int data) {
 		 LinkedListNode currentNode = head;
 		 LinkedListNode newNode = new LinkedListNode(data);
@@ -38,7 +38,7 @@ public class Utility {
 		 currentNode.next = newNode;
 	 }
 	 
-	//method to append to linked list
+	//------------method to append to linked list------------
 	 public void appendList(int data) {
 		 LinkedListNode newNode = new LinkedListNode(data);
 		 newNode.next = null;
@@ -225,6 +225,126 @@ public class Utility {
 			if(node.data == data)
 				return true;
 			return false;
+		}
+		
+		/*------------------------ HashTable methods ------------------------*/
+		
+		public int size = 0;
+		int noOfBuckets = 10;
+		int n;
+		private HashNode [] bucket = new HashNode[noOfBuckets];
+		
+		public class HashNode{
+			Integer key;
+			String value;
+			HashNode next;
+			public HashNode(Integer key, String value ) {
+				this.key = key;
+				this.value = value;
+			}
+		}
+		
+		//---------- method to insert values in hash table -----------
+		public void put(Integer key, String value) {
+			if(key == null || value == null)
+				throw new IllegalArgumentException("key or value are null");
+			int index = getIndex(key);
+			HashNode head = bucket[index];
+			while(head != null) {    // check existing node value in hash table
+				if(head.key.equals(key)) {
+					head.value = value;
+					return;
+				}
+				head = head.next;
+			}
+			size++;
+			head = bucket[index];
+			HashNode node = new HashNode(key, value);
+			node.next = head;
+			bucket[index] = node;
+		}
+		
+		//---------- method to get hash table  index -----------
+		public int getIndex(Integer key) {
+			return key % noOfBuckets;
+		}
+		
+		//---------- method to search value in hash table -----------
+		public String getValue(Integer key) {
+			int index = getIndex(key);
+			HashNode head = bucket[index];
+			while(head != null) {    // check existing node value in hash table
+				if(head.key.equals(key)) {
+					return head.value;
+				}
+				head = head.next;
+			}
+			return null;
+		}
+		
+		//---------- method to print  hash table values -----------
+		public void printHashTable() {
+			for(HashNode i : bucket) {
+				if(i != null)
+					while( i.next != null) {
+						System.out.println(i.value);
+						i = i.next;
+					}
+			}
+		}
+		
+		
+/*------------------------ Binary Search Tree methods ------------------------*/
+		class BSTNode
+		{
+			int key;
+			BSTNode left, right;
+
+			public BSTNode(int item)
+			{
+				key = item;
+				left = right = null;
+			}
+		}
+		
+		BSTNode root;
+		
+		//------------method to insert data in tree------------
+		public void insert(int key)
+		{
+			root = insertRec(root, key);
+		}
+
+		//------------method to insert data in tree------------
+		BSTNode insertRec(BSTNode root, int key)
+		{
+
+			if (root == null)
+			{
+				root = new BSTNode(key);
+				return root;
+			}
+
+			if (key < root.key)
+				root.left = insertRec(root.left, key);
+			else if (key > root.key)
+				root.right = insertRec(root.right, key);
+			return root;
+		}
+
+	//------------method to print sorted data from tree------------
+		public void inorder()
+		{
+			inorderRec(root);
+		}
+
+		void inorderRec(BSTNode root)
+		{
+			if (root != null) {
+				inorderRec(root.left);
+				System.out.println(root.key);
+				inorderRec(root.right);
+			}
 		}
 }
 
