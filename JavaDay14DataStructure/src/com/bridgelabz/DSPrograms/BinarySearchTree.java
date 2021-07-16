@@ -1,6 +1,6 @@
-package com.bridgelabz.programs;
+package com.bridgelabz.DSPrograms;
 
-import com.bridgelabz.Utility.Utility;
+import com.bridgelabz.DSUtility.Utility;
 
 public class BinarySearchTree {
 	
@@ -15,6 +15,8 @@ public class BinarySearchTree {
 		tree.insert(60);
 		tree.insert(80);
 
-		tree.inorder();
+		tree.print();
+		
+		tree.SearchBST(1);
 	}
 }

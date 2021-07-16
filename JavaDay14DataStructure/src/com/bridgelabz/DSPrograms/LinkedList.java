@@ -1,8 +1,9 @@
-package com.bridgelabz.programs;
+package com.bridgelabz.DSPrograms;
 
-import com.bridgelabz.Utility.Utility;
 import java.io.*;
 import java.util.Scanner;
+
+import com.bridgelabz.DSUtility.Utility;
 
 public class LinkedList {
  

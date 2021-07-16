@@ -1,4 +1,11 @@
-package com.bridgelabz.Utility;
+package com.bridgelabz.DSUtility;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.Scanner;
+
+import com.bridgelabz.DSPrograms.LinkedListPrg;
 
 public class Utility {
 	
@@ -293,6 +300,19 @@ public class Utility {
 			}
 		}
 		
+		public int getFrequency(String val) {
+			int cnt = 0;
+			for(HashNode i : bucket) {
+				if(i != null)
+					while( i.next != null) {
+						if(i.value.contains(val));
+							cnt++;
+						i = i.next;
+					}
+			}
+			return cnt;
+		}
+		
 		
 /*------------------------ Binary Search Tree methods ------------------------*/
 		class BSTNode
@@ -333,18 +353,79 @@ public class Utility {
 		}
 
 	//------------method to print sorted data from tree------------
-		public void inorder()
+		public void print()
 		{
-			inorderRec(root);
+			printRec(root);
 		}
 
-		void inorderRec(BSTNode root)
+		void printRec(BSTNode root)
 		{
 			if (root != null) {
-				inorderRec(root.left);
+				printRec(root.left);
 				System.out.println(root.key);
-				inorderRec(root.right);
+				printRec(root.right);
 			}
+		}
+
+		public void SearchBST(int i) {
+			int cnt = 0;
+			BSTNode temp = root;
+			if (temp != null) {
+				while(temp.key < i) {
+					System.out.println(temp.key);
+					temp = temp.left;
+				}
+				if(root.key == i) 
+					cnt++;
+
+				while(temp.key > i) {
+					temp = temp.left;
+				}
+				if(temp.key == i) {
+					cnt++;
+				}
+				
+				if(cnt >0) {
+					System.out.println("True");
+				}
+				else
+					System.out.println("False");
+			}
+			
+		}
+/*---------------------------------- Unordered list methods ------------------------------ */
+		Scanner sc;
+		
+		public Utility() {
+			sc = new Scanner(System.in);
+		}
+		
+		
+		public void readWordFromFile() {
+			try {
+				File file = new File("C:\\Users\\raosa\\git\\JavaDay14DataStructures\\JavaDay14DataStructure\\src\\Text");
+				BufferedReader buffer = new BufferedReader(new FileReader(file));
+				String words = buffer.readLine();
+				//System.out.println(words.toString());
+				String arr[] = words.split(" ");
+				
+				LinkedListPrg list = new LinkedListPrg();
+				
+				for (String i: arr) {
+					list.addStrElement(i);
+				}
+				
+				System.out.println( "\n"+list.printStrList());
+				System.out.print("Enter the string to check is Present in List: ");
+				String searchWord = sc.next();
+				String resultFinal = list.removeOrAdd(searchWord);
+				
+			}
+			 catch (Exception e){
+		           // System.out.println("file not found");
+				 e.printStackTrace();
+		        }
+			
 		}
 }
 

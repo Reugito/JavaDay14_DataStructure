@@ -1,8 +1,8 @@
-package com.bridgelabz.programs;
+package com.bridgelabz.DSPrograms;
 
 import java.util.Scanner;
 
-import com.bridgelabz.Utility.Utility;
+import com.bridgelabz.DSUtility.Utility;
 
 public class Stack {
 		public static void main(String[] args) {
