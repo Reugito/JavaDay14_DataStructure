@@ -403,7 +403,7 @@ public class Utility {
 		
 		public void readWordFromFile() {
 			try {
-				File file = new File("C:\\Users\\raosa\\git\\JavaDay14DataStructures\\JavaDay14DataStructure\\src\\Text");
+				File file = new File("C:\\Users\\raosa\\git\\JavaDay14DataStructures\\JavaDay14DataStructure\\src\\StringText");
 				BufferedReader buffer = new BufferedReader(new FileReader(file));
 				String words = buffer.readLine();
 				//System.out.println(words.toString());
@@ -419,13 +419,67 @@ public class Utility {
 				System.out.print("Enter the string to check is Present in List: ");
 				String searchWord = sc.next();
 				String resultFinal = list.removeOrAdd(searchWord);
-				
-			}
-			 catch (Exception e){
-		           // System.out.println("file not found");
-				 e.printStackTrace();
-		        }
-			
+			}catch (Exception e){ e.printStackTrace();}
 		}
+		
+	/*---------------------------------- ordered list methods ------------------------------------------- */
+
+		//------------------method to read integer data from file-----------------------
+		public void readIntegerFromFile() {
+			try {
+				File file = new File("C:\\Users\\raosa\\git\\JavaDay14DataStructures\\JavaDay14DataStructure\\src\\IntegerDataFile");
+				BufferedReader buffer = new BufferedReader(new FileReader(file));
+				String integerData = buffer.readLine();
+				System.out.println(integerData.toString());
+				
+				int j = 0;
+				  String arr[] = integerData.split(", ");
+				  for(int i = 0; i < arr.length; i++) {
+					  j =  Integer.parseInt(arr[i]);
+					  createLinkedList(j);
+				  }
+				 
+			}catch (Exception e){ e.printStackTrace();}
+		}
+		
+		//------------------method to read integer data from file-----------------------
+		public void createLinkedList(int data) {
+			LinkedListNode newNode = new LinkedListNode(data);
+			 newNode.next = null;
+			 
+			 if(head == null) 
+				 head = newNode;
+			 else {
+				 LinkedListNode currentNode = head;
+				 while(currentNode.next != null) {
+					 currentNode = currentNode.next;
+				 }
+				 currentNode.next = newNode;
+			 }
+		 }
+		
+		//------------------method to sort linked list-----------------------
+		public void sortList()
+	    {
+			LinkedListNode current = head, index = null;
+	        int temp;
+	        if (head == null) {
+	            return;
+	        }
+	        else {
+	            while (current != null) {
+	                index = current.next;
+	                while (index != null) {
+	                    if (current.data > index.data) {
+	                        temp = current.data;
+	                        current.data = index.data;
+	                        index.data = temp;
+	                    }
+	                    index = index.next;
+	                }
+	                current = current.next;
+	            }
+	        }
+	    }
 }
 
