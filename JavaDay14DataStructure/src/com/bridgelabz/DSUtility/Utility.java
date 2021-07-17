@@ -481,5 +481,24 @@ public class Utility {
 	            }
 	        }
 	    }
+		
+		//-------pop  element from linked list --------
+		 public void deleteFromList(int data) {
+			 LinkedListNode currentNode = head;
+			 if(head.data == data) {
+				 popLinkedList();
+				 return;
+			 }
+			while(currentNode.next.data != data) {
+				currentNode = currentNode.next;
+			}
+			if(currentNode.next.next == null) {
+				popLast();
+				return;
+			}
+			LinkedListNode temp = currentNode.next.next;
+			currentNode.next = null;
+			currentNode.next = temp.next.next;
+		 }
 }
 

@@ -12,6 +12,13 @@ public class OrderedList {
 		utility.readIntegerFromFile();
 		utility.sortList();
 		utility.printLinkedList();
+		System.out.print("Enter the number to search: ");
+		int data = sc.nextInt();
+		if(!utility.searchLinkedList(data)) 
+			utility.appendList(data);
+		else
+			utility.deleteFromList(data);
+		utility.printLinkedList();
 	}
 
 }
