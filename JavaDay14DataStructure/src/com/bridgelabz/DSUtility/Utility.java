@@ -98,10 +98,10 @@ public class Utility {
 		private int length = 0;
 		
 		private class StackNode{
-			private int data;
+			private String data;
 			private StackNode next;
 		
-			public StackNode(int data) {
+			public StackNode(String data) {
 				this.data = data;
 			}
 		}
@@ -117,7 +117,7 @@ public class Utility {
 		}
 		
 		// -------method to push data in stack-------------
-		public void push (int data) {
+		public void push (String data) {
 			StackNode item = new StackNode(data);
 			item.next = top;
 			top = item;
@@ -125,13 +125,13 @@ public class Utility {
 		}
 		
 		// -------method to peak data from stack-------------
-		public int peek() {
+		public String peek() {
 			return top.data;
 		}
 		
 		// -------method to pop data from stack-------------
-		public int pop() {
-			int result = top.data;
+		public String pop() {
+			String result = top.data;
 			top = top.next;
 			length--;
 			return result;
@@ -142,7 +142,7 @@ public class Utility {
 			if(isEmpty()) {
 				return;
 			}
-			int ele = peek();
+			String ele = peek();
 			System.out.print(ele+"-->");
 			pop();
 			printStack();
@@ -150,7 +150,7 @@ public class Utility {
 		}
 		
 		// -------method to search element from stack-------------
-		public boolean searchStack(int data) {
+		public boolean searchStack(String data) {
 	        StackNode node = top;
 	        while (node != null){
 	            if(node.data == data)
@@ -500,5 +500,25 @@ public class Utility {
 			currentNode.next = null;
 			currentNode.next = temp.next.next;
 		 }
+
+	/*---------------------------------- Simple Balanced Parentheses methods ------------------------------ */
+		public boolean checkBalancedParenthesis(String arithmaticOperation) {
+			boolean flag = true;
+			for(int i = 0; i < arithmaticOperation.length(); i++) {
+				Character element = arithmaticOperation.charAt(i);
+				if(element.equals('(') ) 
+					push("(");
+				else if(arithmaticOperation.contains(")") ) {
+					pop();
+					if(isEmpty() && i != arithmaticOperation.length()-1)
+						flag = false;
+						break;
+				}
+			}
+			if(isEmpty() && flag)
+				return true;
+			return false;
+			
+		}
 }
 
